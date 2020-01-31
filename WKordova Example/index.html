@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>index.html</title>
+	<meta name="description" content="...">
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
+	<link rel="stylesheet" type="text/css" href="reboot.css">
+	<script src="script.js"></script>
+	<style>
+
+	html, body {
+		margin: 0;
+		height: 100%;
+		padding: 0;
+	}
+	body {
+		/* Better not set overflow: hidden on body, or else when the layout exceeds body you will not notice it. */
+		background-color: #BBD7F3; /* When getting the storyboard color make sure you use the sRGB colorspace https://stackoverflow.com/a/40052756/279890 */
+		font-size: 11px;
+	}
+	.container {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+
+		padding-left: env(safe-area-inset-left);
+		padding-right: env(safe-area-inset-right);
+	}
+	.header {
+		padding-top: env(safe-area-inset-top);
+		padding-left: 20px;
+		flex: 0 0 40px;
+		font-size: 20px;
+		background-color: #B0C5DA;
+	}
+	.main {
+		flex: 1 1 auto;
+		padding: 10px;
+		overflow: auto;
+	}
+	.footer {
+		padding-bottom: env(safe-area-inset-bottom);
+		padding-top: 10px;
+		/* this should stick to the botom */
+		flex: 0 0 40px;
+		text-align: center;
+		background-color: #B0C5DA;
+	}
+	p {
+		margin: 0;
+		margin-bottom: 5px
+	}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			Demo
+		</div>
+		<div class="main">
+			<p>
+			<strong>insomnia</strong><br>
+			<button onclick="window.plugins.insomnia.setEnabled(true)">setEnabled true</button>
+			<button onclick="window.plugins.insomnia.setEnabled(false)">setEnabled false</button>
+			<button onclick="setBody(window.plugins.insomnia.isEnabled)">print</button>
+			</p>
+			<p>
+			<strong>nativeStorage</strong><br>
+			<button onclick="window.plugins.nativeStorage.setItem('keyy', 'valuex')">setItem</button>
+			<button onclick="window.plugins.nativeStorage.getItem('keyy', setBody)">getItem</button>
+			<button onclick="window.plugins.nativeStorage.removeItem('keyy')">removeItem</button>
+			<button onclick="window.plugins.nativeStorage.clear()">clear</button>
+			</p>
+			<p>
+			<strong>keychain</strong><br>
+			<button onclick="window.plugins.keychain.setItem('keyx', 'secret')">setItem</button>
+			<button onclick="window.plugins.keychain.getItem('keyx', setBody)">getItem</button>
+			<button onclick="window.plugins.keychain.removeItem('keyx')">removeItem</button>
+			<button onclick="window.plugins.keychain.clear()">clear</button>
+			</p>
+			<p>
+			<strong>mDNS (takes 6 seconds)</strong><br>
+			<button onclick="window.plugins.mDNS.browse('_http._tcp', setBody)">browse _http._tcp</button>
+			<button onclick="window.plugins.mDNS.browse('_ipp._tcp', setBody)">browse _ipp._tcp</button>
+			<button onclick="window.plugins.mDNS.browse('_blabla._tcp', setBody)">browse _blabla._tcp</button>
+			</p>
+			<p>
+			<strong>image</strong><br>
+			<button onclick="window.plugins.camera.pickImage(900, setImage)">pickImage</button>
+			<img id="image" style="width: 100px">
+			</p>
+			<p>
+			<strong>geolocation</strong><br>
+			<button onclick="window.plugins.geolocation.getCurrentPosition(setBody)">getCurrentPosition</button>
+			</p>
+			<p>
+			<strong>connection</strong><br>
+			<button onclick="window.plugins.connection.getType(setBody)">getNetworkType</button>
+			</p>
+			<p>
+			<strong>utils</strong><br>
+			<button onclick="window.plugins.utils.openURL('http://www.google.ch')">openURL</button>
+			<button onclick="setBody(window.plugins.device)">device data</button>
+			<button onclick="setBody(window.plugins.app)">app data</button>
+			</p>
+			<strong>result</strong><br>
+			<pre id="body">
+			</pre>
+			<br><br><br>
+			<br><br><br>
+			<br><br><br>
+			<br><br><br><br><br><br><br><br><br>
+			<br><br><br>
+			<p>
+				<strong>Keyboard show/hide while keeping position</strong><br>
+				<input type="text"/> <!-- to text keyboard hiding -->
+			</p>
+			<br><br><br>
+			<br><br><br>
+		</div>
+		<div class="footer">
+			Created by <a href="https://yannick.dev">Yannick Weiss</a>
+		</div>
+	</div>
+</body>
+</html>
